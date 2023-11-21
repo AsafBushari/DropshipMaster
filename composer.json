@@ -1,0 +1,17 @@
+{
+    "name": "dropshipmaster/dropship-master",
+    "description": "dropshiping pligin tools",
+    "autoload": {
+        "psr-4": {
+            "Dropshipmaster\\DropshipMaster\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "asaf"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.15"
+    }
+}

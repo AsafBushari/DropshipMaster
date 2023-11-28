@@ -82,9 +82,6 @@ class MenuCreator {
     // ** admin_init ** //
 	public function DSM_admin_init_func() {
 
-		die(DSM_PLUGIN_PATH);
-		deactivate_plugins('/DropshipMaster/plugin.php');
-
 		// Settings API
 		register_setting( 'DSM_options_group', 'DSM_supplier_mail' );
 		register_setting( 'DSM_options_group', 'DSM_selected_product_fields' );

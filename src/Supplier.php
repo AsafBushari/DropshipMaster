@@ -15,21 +15,22 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
     public function send_order_details_via_mail($order_id, $old_status, $new_status){
 
-        // wp_mail( 'asafbushari@gmail.com', 'Form dev-site',  'test' );
-        // if( $new_status != 'processing' ) return;
-
+        
         // If empty fields to send to the Supplier, return
         $order = wc_get_order( $order_id );
         $order_data = $order->get_data();
         $order_shipping_data = $order_data['shipping'];
         $order_billing_data = $order_data['billing'];
-
-        $supplier_email = get_option( 'DSM_supplier_mail' );
-        $order_fields = get_option( 'DSM_selected_order_fields', array() );
-        $product_fields = get_option( 'DSM_selected_product_fields', array() );
-        $billing_fields = get_option( 'DSM_selected_billing_fields', array() );
-        $shipping_fields = get_option( 'DSM_selected_shipping_fields', array() );
         
+        $supplier_email = get_option( 'DSM_supplier_mail' );
+        $order_fields = get_option( 'DSM_selected_order_fields' );
+        $product_fields = get_option( 'DSM_selected_product_fields' ) ?? array();
+        $billing_fields = get_option( 'DSM_selected_billing_fields' ) ?? array();
+        $shipping_fields = get_option( 'DSM_selected_shipping_fields' ) ?? array();
+        
+        // if( $new_status != 'processing' ) return;
+        if( ! is_email( $supplier_email ) ) return;
+
         // Create a new spreadsheet
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
@@ -44,7 +45,8 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
         /**$nested_loop_counter = 1;**/
         
         // Set excel order data
-        $order_fields_length = count( $order_fields );
+        wp_die( gettype( $order_fields ) . ' - ' . print_r( $order_fields ) );
+        if( $order_fields ) $order_fields_length = count( $order_fields );
         foreach( $order_fields as $value ){
             
             // First row in order fields

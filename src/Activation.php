@@ -13,19 +13,21 @@ class Activation {
                 ?>
                 
                 <div class="error">
-                    <p><?php _e('There was an issue with <b>Dropship Master</b>. <br> WooCommerce must be active on this site!', ''); ?></p>
+                    <p><?php _e('
+                    <ul>
+                    There was an issue with <b>Dropship Master</b>.
+                    <li>WooCommerce must be active on this site!</li>
+                    </ul>
+                    ', ''); ?></p>
                 </div>
                 
                 <?php
             
             });
 
-            deactivate_plugins(plugin_basename( DSM_INDEX_PATH ));
-        
+            deactivate_plugins( plugin_basename( DSM_INDEX_PATH ) );
         
         }
-    
-
         
     }
 
